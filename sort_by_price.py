@@ -17,11 +17,20 @@ import argparse
 import json
 import sys
 import time
+import unicodedata
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
 
 import requests
+
+
+def normalize_name(name: str) -> str:
+    """Normalize card name for lookup (strip accents, lowercase)."""
+    # NFD decomposes characters, then filter out combining marks (accents)
+    normalized = unicodedata.normalize("NFD", name)
+    ascii_name = "".join(c for c in normalized if unicodedata.category(c) != "Mn")
+    return ascii_name.strip().lower()
 
 
 # API endpoints
@@ -192,7 +201,8 @@ def load_ck_pricelist() -> dict[str, list[dict]] | None:
 
 def lookup_ck_price(card_name: str, pricelist: dict[str, list[dict]]) -> CardPrice:
     """Look up a card's price from the Card Kingdom pricelist."""
-    name_key = card_name.strip().lower()
+    # Normalize name (strip accents) since CK uses ASCII names
+    name_key = normalize_name(card_name)
     
     # Try exact match first
     matches = pricelist.get(name_key, [])
@@ -579,13 +589,11 @@ def main():
 
     args = parser.parse_args()
 
-    # Handle cache clearing
+    # Handle cache clearing (keeps CK pricelist since it's rate-limited)
     if args.clear_cache:
         if CACHE_FILE.exists():
             CACHE_FILE.unlink()
-        if args.source == "cardkingdom" and CK_PRICELIST_FILE.exists():
-            CK_PRICELIST_FILE.unlink()
-        print("🗑️  Cache cleared")
+        print("🗑️  Price cache cleared (Card Kingdom pricelist preserved)")
 
     try:
         cards = read_card_list(args.input_file)

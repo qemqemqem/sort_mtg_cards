@@ -1,0 +1,559 @@
+============================================================
+MTG Card Price Summary (Threshold: $0.70)
+============================================================
+
+Price Source:  Card Kingdom (via cardkingdom.com API)
+Retrieved:     2026-01-10 22:02
+
+BELOW $0.70:
+  Cards:    191
+  Total:    $90.97
+
+AT OR ABOVE $0.70:
+  Cards:    342
+  Total:    $4178.58
+
+GRAND TOTAL: $4269.55 (533 cards)
+
+============================================================
+Cards BELOW $0.70 (sorted by price)
+============================================================
+
+     $0.35 | Shiny Impetus
+     $0.35 | Trove of Temptation
+     $0.35 | Adventurer's Airship
+     $0.35 | Bitter Work
+     $0.35 | Careening Mine Cart
+     $0.35 | Chief of the Foundry
+     $0.35 | Commune with Beavers
+     $0.35 | Dynamite Diver
+     $0.35 | Earthrumbler
+     $0.35 | Guidelight Matrix
+     $0.35 | House Cartographer
+     $0.35 | Intrepid Stablemaster
+     $0.35 | Loyal Apprentice
+     $0.35 | Luxurious Locomotive
+     $0.35 | Push the Limit
+     $0.35 | Reckless Velocitaur
+     $0.35 | Road Rage
+     $0.35 | Rocketeer Boostbuggy
+     $0.35 | Rocky Roads
+     $0.35 | Run Over
+     $0.35 | Siege Modification
+     $0.35 | Speedway Fanatic
+     $0.35 | Spire Mechcycle
+     $0.35 | Start Your Engines
+     $0.35 | Untethered Express
+     $0.35 | Veloheart Bike
+     $0.35 | Wild Roads
+     $0.35 | Angelic Benediction
+     $0.35 | Angelic Exaltation
+     $0.35 | Aven Squire
+     $0.35 | Brokers Charm
+     $0.35 | Court Archers
+     $0.35 | Ethercaste Knight
+     $0.35 | Frontline Sage
+     $0.35 | Guardians of Akrasa
+     $0.35 | Sighted-Caste Sorcerer
+     $0.35 | Waveskimmer Aven
+     $0.35 | Bloodbraid Elf
+     $0.35 | Captain Lannery Storm
+     $0.35 | Gruul War Chant
+     $0.35 | Hate Mirage
+     $0.35 | Loyal Apprentice
+     $0.35 | Primal Forcemage
+     $0.35 | Reinforced Ronin
+     $0.35 | Ruby, Daring Tracker
+     $0.35 | Samut, Tyrant Smasher
+     $0.35 | Call of the Conclave
+     $0.35 | Commander's Sphere
+     $0.35 | Druid's Deliverance
+     $0.35 | Griffin Aerie
+     $0.35 | Muster the Departed
+     $0.35 | Overrun
+     $0.35 | Queen Allenal of Ruadach
+     $0.35 | Trostani's Judgment
+     $0.35 | Trostani's Summoner
+     $0.35 | Vitu-Ghazi, the City-Tree
+     $0.35 | Wake the Reflections
+     $0.35 | Wayfaring Temple
+     $0.35 | Elite Guardmage
+     $0.35 | Kor Cartographer
+     $0.35 | Oji, the Exquisite Blade
+     $0.35 | Sea Gate Oracle
+     $0.35 | Wall of Omens
+     $0.35 | Ash Barrens
+     $0.35 | Commander's Sphere
+     $0.35 | Darksteel Ingot
+     $0.35 | Haunted Screen
+     $0.35 | Hedron Archive
+     $0.35 | Moss Diamond
+     $0.35 | Path of Ancestry
+     $0.35 | Simic Signet
+     $0.35 | Starnheim Memento
+     $0.35 | White Auracite
+     $0.39 | Frontier Warmonger
+     $0.39 | Rhox Charger
+     $0.39 | Staggering Insight
+     $0.39 | Mind Stone
+     $0.49 | Agitator Ant
+     $0.49 | Alesha, Who Smiles at Death
+     $0.49 | Decimate
+     $0.49 | Parasitic Impetus
+     $0.49 | Balthier and Fran
+     $0.49 | Cultivator's Caravan
+     $0.49 | Daretti, Rocketeer Engineer
+     $0.49 | Lifecraft Engine
+     $0.49 | Magmatic Galleon
+     $0.49 | Meria, Scholar of Antiquity
+     $0.49 | Mighty Servant of Leuk-o
+     $0.49 | Reckless Crew
+     $0.49 | Redshift, Rocketeer Chief
+     $0.49 | Rolling Hamsphere
+     $0.49 | Spire of Industry
+     $0.49 | Surgehacker Mech
+     $0.49 | Anzrag's Rampage
+     $0.49 | Arni Metalbrow
+     $0.49 | Bloodbraid Challenger
+     $0.49 | Calamity, Galloping Inferno
+     $0.49 | Death-Greeter's Champion
+     $0.49 | Deathleaper, Terror Weapon
+     $0.49 | Decimate
+     $0.49 | Echoing Assault
+     $0.49 | Flamerush Rider
+     $0.49 | Hammer of Purphoros
+     $0.49 | Kari Zev, Skyship Raider
+     $0.49 | Kessig Wolf Run
+     $0.49 | Ogre Battledriver
+     $0.49 | Polygoyf
+     $0.49 | Scurry of Squirrels
+     $0.49 | Squee, Dubious Monarch
+     $0.49 | Advent of the Wurm
+     $0.49 | Arasta of the Endless Web
+     $0.49 | Assemble the Entmoot
+     $0.49 | Audience with Trostani
+     $0.49 | Battle for Bretagard
+     $0.49 | Castle Ardenvale
+     $0.49 | Emmara Tandris
+     $0.49 | God-Pharaoh's Gift
+     $0.49 | Hour of Reckoning
+     $0.49 | Phyrexian Rebirth
+     $0.49 | Soul of Eternity
+     $0.49 | Seance
+     $0.49 | Trelasarra, Moon Dancer
+     $0.49 | Abuelo, Ancestral Echo
+     $0.49 | Blade Splicer
+     $0.49 | Genku, Future Shaper
+     $0.49 | Lavinia of the Tenth
+     $0.49 | Myr Battlesphere
+     $0.49 | Skyclave Apparition
+     $0.49 | Solemn Simulacrum
+     $0.49 | Astral Cornucopia
+     $0.49 | Command Tower
+     $0.49 | Crystalline Crawler
+     $0.49 | Exotic Orchard
+     $0.49 | Marble Diamond
+     $0.49 | Prairie Stream
+     $0.49 | Pristine Talisman
+     $0.49 | Skycloud Expanse
+     $0.49 | Temple of Enlightenment
+     $0.59 | Avatar of Slaughter
+     $0.59 | Frenzied Saddlebrute
+     $0.59 | Grenzo, Havoc Raiser
+     $0.59 | Hot Pursuit
+     $0.59 | Kazuul, Tyrant of the Cliffs
+     $0.59 | Sandwurm Convergence
+     $0.59 | Thelon of Havenwood
+     $0.59 | Esika's Chariot
+     $0.59 | Mechtitan Core
+     $0.59 | Unlicensed Hearse
+     $0.59 | Stampede Surfer
+     $0.59 | Esika's Chariot
+     $0.59 | Gruff Triplets
+     $0.59 | King Darien XLVIII
+     $0.59 | Phyrexian Processor
+     $0.59 | Rampaging Baloths
+     $0.59 | Sandwurm Convergence
+     $0.59 | Inspiring Overseer
+     $0.59 | Peregrine Drake
+     $0.59 | Spirited Companion
+     $0.59 | Azorius Signet
+     $0.59 | Everflowing Chalice
+     $0.59 | Fire Diamond
+     $0.59 | Glacial Fortress
+     $0.59 | Sky Diamond
+     $0.59 | Talisman of Resilience
+     $0.69 | Alexios, Deimos of Kosmos
+     $0.69 | Bloodthirsty Blade
+     $0.69 | Goblin Diplomats
+     $0.69 | Midnight Crusader Shuttle
+     $0.69 | Idolized
+     $0.69 | Domri, Anarch of Bolas
+     $0.69 | Doors of Durin
+     $0.69 | End-Raze Forerunners
+     $0.69 | Phoenix Chick
+     $0.69 | Tempt with Vengeance
+     $0.69 | Wild Growth
+     $0.69 | Accomplished Alchemist
+     $0.69 | Dawn of Hope
+     $0.69 | Rootborn Defenses
+     $0.69 | Sakura-Tribe Elder
+     $0.69 | Speaker of the Heavens
+     $0.69 | Restoration Angel
+     $0.69 | Bender's Waterskin
+     $0.69 | Frostboil Snarl
+     $0.69 | Gatewatch Beacon
+     $0.69 | Golgari Signet
+     $0.69 | Orzhov Signet
+     $0.69 | Shivan Reef
+     $0.69 | Sulfur Falls
+     $0.69 | Talisman of Curiosity
+     $0.69 | Talisman of Impulse
+     $0.69 | Worn Powerstone
+
+============================================================
+Cards AT OR ABOVE $0.70 (sorted by price)
+============================================================
+
+     $0.79 | Deathsprout
+     $0.79 | Goblin Anarchomancer
+     $0.79 | Spectacular Showdown
+     $0.79 | Vengeful Ancestor
+     $0.79 | Amonkhet Raceway
+     $0.79 | Buried Ruin
+     $0.79 | Foundry Inspector
+     $0.79 | Mech Hangar
+     $0.79 | Pia's Revolution
+     $0.79 | Rootbound Crag
+     $0.79 | Topiary Stomper
+     $0.79 | Akrasan Squire
+     $0.79 | Strength of the Harvest
+     $0.79 | Goblin Anarchomancer
+     $0.79 | Indulge // Excess
+     $0.79 | Legion Warboss
+     $0.79 | Mimic Vat
+     $0.79 | Ulvenwald Oddity
+     $0.79 | Arcane Signet
+     $0.79 | Awakening Zone
+     $0.79 | Mimic Vat
+     $0.79 | Selesnya Eulogist
+     $0.79 | Helpful Hunter
+     $0.79 | Stonehorn Dignitary
+     $0.79 | Watcher for Tomorrow
+     $0.79 | Yorion, Sky Nomad
+     $0.79 | Arcane Signet
+     $0.79 | Charcoal Diamond
+     $0.79 | Ferrous Lake
+     $0.79 | Heraldic Banner
+     $0.79 | Izzet Signet
+     $0.79 | Talisman of Conviction
+     $0.79 | Talisman of Progress
+     $0.99 | Curse of Bounty
+     $0.99 | Rite of the Raging Storm
+     $0.99 | Aqueous Form
+     $0.99 | Pippin, Guard of the Citadel
+     $0.99 | Elemental Mastery
+     $0.99 | Horn of the Mark
+     $0.99 | Rite of the Raging Storm
+     $0.99 | Tilonalli's Summoner
+     $0.99 | Warchief Giant
+     $0.99 | Cultivate
+     $0.99 | Lathiel, the Bounteous Dawn
+     $0.99 | Legion Loyalty
+     $0.99 | Rampant Growth
+     $0.99 | Selesnya Signet
+     $0.99 | Shamanic Revelation
+     $0.99 | Trostani Discordant
+     $0.99 | Frost Titan
+     $0.99 | Cascade Bluffs
+     $0.99 | Gruul Signet
+     $0.99 | Selesnya Signet
+     $1.29 | Fumiko the Lowblood
+     $1.29 | Cybership
+     $1.29 | Gloin, Dwarf Emissary
+     $1.29 | Goliath Truck
+     $1.29 | Oviya, Automech Artisan
+     $1.29 | Reckoner Bankbuster
+     $1.29 | Combat Research
+     $1.29 | Favor of the Overbeing
+     $1.29 | Sigiled Paladin
+     $1.29 | Captain's Claws
+     $1.29 | Ezuri's Predation
+     $1.29 | Goblin Assault
+     $1.29 | Goblin Rabblemaster
+     $1.29 | Stump Stomp
+     $1.29 | Camaraderie
+     $1.29 | Ezuri's Predation
+     $1.29 | Idol of Oblivion
+     $1.29 | Boros Signet
+     $1.29 | Palladium Myr
+     $1.29 | Replicating Ring
+     $1.49 | Brash Taunter
+     $1.49 | Court of Bounty
+     $1.49 | Garruk's Uprising
+     $1.49 | Kardur, Doomscourge
+     $1.49 | Ruric Thar, the Unbowed
+     $1.49 | Lumbering Worldwagon
+     $1.49 | Elturel Survivors
+     $1.49 | Garruk's Uprising
+     $1.49 | Grand Warlord Radha
+     $1.49 | Grim Reaper's Sprint
+     $1.49 | Angelic Accord
+     $1.49 | Avenger of Zendikar
+     $1.49 | Nykthos Paragon
+     $1.49 | Thousand Moons Smithy
+     $1.49 | Karmic Guide
+     $1.49 | Venser, Shaper Savant
+     $1.49 | Talisman of Hierarchy
+     $1.79 | Curse of Opulence
+     $1.79 | Defend the Rider
+     $1.79 | Pyrewood Gearhulk
+     $1.79 | Simic Charm
+     $1.79 | Sovereigns of Lost Alara
+     $1.79 | Siege-Gang Lieutenant
+     $1.79 | Elspeth, Sun's Champion
+     $1.79 | Finale of Glory
+     $1.79 | Full Flowering
+     $1.79 | Generous Gift
+     $1.79 | Storm Herd
+     $1.79 | Talisman of Unity
+     $1.79 | Trudge Garden
+     $1.79 | Voice of Resurgence
+     $1.79 | Dimir Signet
+     $1.79 | Talisman of Unity
+     $1.99 | Cunning Rhetoric
+     $1.99 | Frenzied Gorespawn
+     $1.99 | Revitalizing Repast
+     $1.99 | Smuggler's Copter
+     $1.99 | Ardent Plea
+     $1.99 | Battlegrace Angel
+     $1.99 | Loxodon Warhammer
+     $1.99 | Bridgeworks Battle
+     $1.99 | Infantry Shield
+     $1.99 | Scion of Calamity
+     $1.99 | Smellerbee, Rebel Fighter
+     $1.99 | Urabrask's Forge
+     $1.99 | Divine Visitation
+     $1.99 | Path to Exile
+     $1.99 | Rhox Faithmender
+     $1.99 | Rhys the Redeemed
+     $1.99 | Shalai, Voice of Plenty
+     $1.99 | Skyshroud Claim
+     $1.99 | Sol Ring
+     $1.99 | Swords to Plowshares
+     $1.99 | Ghostly Flicker
+     $1.99 | Fellwar Stone
+     $1.99 | Sol Ring
+     $2.29 | Grismold, the Dreadsower
+     $2.29 | Thantis, the Warweaver
+     $2.29 | Thunderous Velocipede
+     $2.29 | Anger
+     $2.29 | Halana and Alena, Partners
+     $2.29 | Kogla and Yidaro
+     $2.29 | Laelia, the Blade Reforged
+     $2.29 | Rhonas's Monument
+     $2.29 | Xenagos, the Reveler
+     $2.29 | Conclave Evangelist
+     $2.29 | Eternal Witness
+     $2.29 | Rite of Harmony
+     $2.29 | Charming Prince
+     $2.29 | Skyclave Relic
+     $2.29 | Talisman of Dominance
+     $2.49 | Grand Melee
+     $2.49 | Marchesa's Decree
+     $2.49 | Xantcha, Sleeper Agent
+     $2.49 | Kutzil, Malamet Exemplar
+     $2.49 | Shield of the Oversoul
+     $2.49 | Jaxis, the Troublemaker
+     $2.49 | Samut, Vizier of Naktamun
+     $2.49 | For the Common Good
+     $2.49 | Kodama's Reach
+     $2.49 | Well of Lost Dreams
+     $2.49 | Cursed Mirror
+     $2.79 | Hanweir Garrison
+     $2.79 | Ghalta and Mavren
+     $2.79 | Valkyrie Harbinger
+     $2.79 | Rakdos Signet
+     $2.79 | The Eternity Elevator
+     $2.79 | Thought Vessel
+     $2.99 | Alesha, Who Laughs at Fate
+     $2.99 | Elder Gargaroth
+     $2.99 | Geode Rager
+     $2.99 | Goblin Spymaster
+     $2.99 | Danitha, New Benalia's Light
+     $2.99 | Blasphemous Act
+     $2.99 | Elemental Bond
+     $2.99 | Aura Mutation
+     $2.99 | Elemental Bond
+     $2.99 | Garruk, Primal Hunter
+     $2.99 | Overwhelming Stampede
+     $2.99 | Second Harvest
+     $2.99 | Anticausal Vestige
+     $2.99 | Talisman of Indulgence
+     $3.49 | Emberwilde Captain
+     $3.49 | Spider-Punk
+     $3.49 | Spirit Mantle
+     $3.49 | Devastating Onslaught
+     $3.49 | Frenzied Baloth
+     $3.49 | Minsc & Boo, Timeless Heroes
+     $3.49 | Nissa, Ascended Animist
+     $3.49 | Thran Dynamo
+     $3.99 | Pramikon, Sky Rampart
+     $3.99 | The Sound of Drums
+     $3.99 | Toski, Bearer of Secrets
+     $3.99 | Enduring Courage
+     $3.99 | Toski, Bearer of Secrets
+     $3.99 | Felidar Sovereign
+     $3.99 | Grand Crescendo
+     $3.99 | Haliya, Guided by Light
+     $3.99 | Soul Warden
+     $3.99 | Talisman of Creativity
+     $4.49 | Disrupt Decorum
+     $4.49 | Beastmaster Ascension
+     $4.49 | Blade of Selves
+     $4.49 | Disrupt Decorum
+     $4.49 | Full Throttle
+     $4.49 | Questing Beast
+     $4.49 | Song of Totentanz
+     $4.49 | Blade of Selves
+     $4.49 | Cosmos Elixir
+     $4.49 | Court of Grace
+     $4.49 | Essence Warden
+     $4.49 | Felidar Guardian
+     $4.49 | Loran of the Third Path
+     $4.49 | Mystic Gate
+     $4.99 | Blackblade Reforged
+     $4.99 | Eldrazi Conscription
+     $4.99 | Skullclamp
+     $4.99 | Bramble Sovereign
+     $4.99 | Skullclamp
+     $4.99 | Test of Endurance
+     $4.99 | Decanter of Endless Water
+     $4.99 | Victory Chimes
+     $5.49 | Herd Heirloom
+     $5.49 | Professional Face-Breaker
+     $5.49 | Sublime Archangel
+     $5.49 | Bow of Nylea
+     $5.49 | Flameshadow Conjuring
+     $5.49 | Fury of the Horde
+     $5.49 | Goldlust Triad
+     $5.49 | Professional Face-Breaker
+     $5.49 | Urabrask the Hidden
+     $5.49 | Arachnogenesis
+     $5.49 | Huatli, Radiant Champion
+     $5.49 | Basalt Monolith
+     $5.49 | Herd Heirloom
+     $5.99 | Death Kiss
+     $5.99 | Anduril, Flame of the West
+     $5.99 | Druids' Repository
+     $5.99 | Liquimetal Torque
+     $6.49 | Rhythm of the Wild
+     $6.49 | Xenagos, God of Revels
+     $6.49 | Soul's Attendant
+     $6.49 | The Wind Crystal
+     $6.49 | Deserted Beach
+     $6.99 | Anzrag, the Quake-Mole
+     $6.99 | Elspeth, Knight-Errant
+     $6.99 | Atalan Jackal
+     $6.99 | Great Train Heist
+     $6.99 | Exemplar of Light
+     $6.99 | Dawnsire, Sunstar Dreadnought
+     $7.49 | Varchild, Betrayer of Kjeldor
+     $7.49 | Ardoz, Cobbler of War
+     $7.49 | Growing Rites of Itlimoc
+     $7.49 | Machine God's Effigy
+     $7.99 | Hellish Rebuke
+     $7.99 | Bello, Bard of the Brambles
+     $7.99 | The Fire Crystal
+     $7.99 | Halo Fountain
+     $7.99 | Resplendent Angel
+     $7.99 | Song of the Worldsoul
+     $7.99 | White Lotus Tile
+     $8.49 | Ajani, Strength of the Pride
+     $8.49 | Fabled Passage
+     $8.99 | Ohran Frostfang
+     $8.99 | Sword of the Animist
+     $8.99 | Blossoming Bogbeast
+     $9.49 | Enduring Vitality
+     $9.49 | Ghoulish Impetus
+     $9.49 | Sneak Attack
+     $9.49 | Twinflame
+     $9.49 | Helm of the Host
+     $9.49 | Mirari's Wake
+     $9.49 | Recruiter of the Guard
+     $9.99 | Untimely Malfunction
+     $9.99 | Whip of Erebos
+     $9.99 | Delina, Wild Mage
+     $9.99 | Untimely Malfunction
+     $9.99 | The Book of Exalted Deeds
+    $10.99 | Life of the Party
+    $10.99 | Wheel of Misfortune
+    $10.99 | Patchwork Banner
+    $11.99 | War's Toll
+    $11.99 | Mother of Runes
+    $11.99 | Bedlam
+    $11.99 | Relic of Sauron
+    $12.99 | Kharn the Betrayer
+    $12.99 | Rammas Echor, Ancient Shield
+    $12.99 | Goldspan Dragon
+    $12.99 | Ilharg, the Raze-Boar
+    $12.99 | Crested Sunmare
+    $12.99 | Luminarch Ascension
+    $13.99 | Marisi, Breaker of the Coil
+    $13.99 | Caretaker's Talent
+    $13.99 | Floodfarm Verge
+    $13.99 | Reflecting Pool
+    $14.99 | Guardian Project
+    $14.99 | Noble Hierarch
+    $14.99 | Embercleave
+    $14.99 | The Gaffer
+    $14.99 | Training Center
+    $15.99 | Rashel, Fist of Torm
+    $15.99 | Tribute to the World Tree
+    $15.99 | Tribute to the World Tree
+    $16.99 | Karazikar, the Eye Tyrant
+    $16.99 | Heroic Intervention
+    $16.99 | Kiki-Jiki, Mirror Breaker
+    $17.99 | Descent into Avernus
+    $17.99 | Ruby Medallion
+    $18.99 | Excalibur, Sword of Eden
+    $18.99 | Dino DNA
+    $18.99 | Exalted Sunborn
+    $19.99 | Concordant Crossroads
+    $19.99 | Craterhoof Behemoth
+    $19.99 | Craterhoof Behemoth
+    $19.99 | Evendo, Waking Haven
+    $19.99 | Triumph of the Hordes
+    $20.99 | Bothersome Quasit
+    $20.99 | Aggravated Assault
+    $20.99 | Misleading Signpost
+    $21.99 | Nesting Dovehawk
+    $22.99 | Parallel Lives
+    $22.99 | Sea of Clouds
+    $24.99 | Shadow in the Warp
+    $24.99 | Aetherflux Reservoir
+    $27.99 | Delighted Halfling
+    $32.99 | Mithril Coat
+    $32.99 | Ojer Taq, Deepest Foundation
+    $32.99 | The Walls of Ba Sing Se
+    $34.99 | Lotus Petal
+    $34.99 | Scalding Tarn
+    $37.99 | Chrome Mox
+    $39.99 | Dolmen Gate
+    $39.99 | Exploration
+    $39.99 | Prismatic Vista
+    $42.99 | Avatar Roku, Firebender
+    $42.99 | Metalworker
+    $44.99 | Sword of Feast and Famine
+    $47.99 | Ragavan, Nimble Pilferer
+    $54.99 | Sword of Fire and Ice
+    $54.99 | Ocelot Pride
+    $57.99 | Shadowspear
+    $57.99 | The Great Henge
+    $57.99 | The Great Henge
+    $64.99 | Anointed Procession
+    $64.99 | Archangel of Thune
+    $74.99 | Mox Amber
+    $84.99 | Mana Vault
+   $229.99 | Mox Opal
+  $1199.99 | Mox Diamond
