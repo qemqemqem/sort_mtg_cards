@@ -1,0 +1,13 @@
+# Sample MTG card list
+# One card name per line, comments start with #
+
+Lightning Bolt
+Counterspell
+Sol Ring
+Birds of Paradise
+Llanowar Elves
+Path to Exile
+Fatal Push
+Thoughtseize
+Snapcaster Mage
+Arclight Phoenix

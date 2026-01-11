@@ -1,0 +1,15 @@
+# Virtual environment
+venv/
+
+# Price cache
+.price_cache.json
+.ck_pricelist.json
+
+# Output files
+*_below.txt
+*_above.txt
+sorted_*.txt
+
+# Python
+__pycache__/
+*.pyc
