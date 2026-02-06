@@ -443,8 +443,8 @@
         </header>
 
         <div class="description">
-            <p><strong>What is this tool?</strong> Paste a list of Magic: The Gathering card names (one per line) and get them sorted by current market prices. Perfect for finding budget cards or splitting your collection into price tiers.</p>
-            <p style="margin-top: 0.5rem;"><strong>How it works:</strong> Choose your price source (TCGPlayer or Card Kingdom), set a price threshold, and click "Sort Cards". Your list will be split into cards below your threshold, above it, and any that weren't found. Export the results directly to TCGPlayer or Card Kingdom for easy purchasing.</p>
+            <p>If you're buying cards for EDH, you can use this tool to sort the cheaps from the expensives. Buy reals for the cheaps, and proxies for the reals!</p>
+            <p>Paste a list of card names (one per line), pick a price source and threshold, and hit "Sort Cards". Cards under the threshold go in one list (buy real copies), cards over it go in another (proxy these). You can export the cheap list straight to TCGPlayer or Card Kingdom.</p>
         </div>
 
         <div class="controls">
@@ -525,6 +525,9 @@ Black Lotus"></textarea>
                     <textarea id="outputCards" readonly placeholder="Results will appear here..."></textarea>
                     <div style="margin-top: 0.5rem; text-align: right;">
                         <button class="btn btn-secondary copy-btn" onclick="copyOutput()">Copy to Clipboard</button>
+                    </div>
+                    <div id="mpcHint" style="display: none; margin-top: 0.5rem; text-align: center; font-size: 0.9rem;">
+                        Print proxies with <a href="https://mpcfill.com/" target="_blank" class="external-link">MPC Fill</a>
                     </div>
                 </div>
             </div>
@@ -863,6 +866,7 @@ Black Lotus"></textarea>
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.tab === tab);
             });
+            document.getElementById('mpcHint').style.display = tab === 'above' ? 'block' : 'none';
             updateOutput();
         }
 
