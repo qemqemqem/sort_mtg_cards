@@ -692,9 +692,9 @@ Black Lotus"></textarea>
             const output = document.getElementById('outputCards');
             
             if (currentTab === 'below') {
-                output.value = results.below.map(c => c.name).join('\n');
+                output.value = results.below.map(c => `1 ${c.name}`).join('\n');
             } else if (currentTab === 'above') {
-                output.value = results.above.map(c => c.name).join('\n');
+                output.value = results.above.map(c => `1 ${c.name}`).join('\n');
             } else if (currentTab === 'notfound') {
                 output.value = results.notFound.map(c => `${c.name}${c.error ? ` (${c.error})` : ''}`).join('\n');
             } else if (currentTab === 'summary') {
