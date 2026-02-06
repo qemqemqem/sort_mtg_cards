@@ -369,6 +369,9 @@
                     <option value="tcgplayer">TCGPlayer (via Scryfall)</option>
                     <option value="cardkingdom">Card Kingdom</option>
                 </select>
+                <a href="https://www.tcgplayer.com/massentry" target="_blank" rel="noopener noreferrer" class="external-link" id="tcgBuilderLink">
+                    TCGPlayer Mass Entry
+                </a>
                 <a href="https://www.cardkingdom.com/builder" target="_blank" rel="noopener noreferrer" class="external-link" id="ckBuilderLink" style="display: none;">
                     Card Kingdom Builder
                 </a>
@@ -807,11 +810,14 @@ Path to Exile
 Cultivate`;
         }
 
-        // Update Card Kingdom builder link visibility
+        // Update builder link visibility based on selected source
         function updateBuilderLink() {
             const source = document.getElementById('source').value;
-            const link = document.getElementById('ckBuilderLink');
-            link.style.display = source === 'cardkingdom' ? 'inline-flex' : 'none';
+            const tcgLink = document.getElementById('tcgBuilderLink');
+            const ckLink = document.getElementById('ckBuilderLink');
+            
+            tcgLink.style.display = source === 'tcgplayer' ? 'inline-flex' : 'none';
+            ckLink.style.display = source === 'cardkingdom' ? 'inline-flex' : 'none';
         }
 
         // Initialize
