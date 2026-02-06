@@ -334,6 +334,7 @@
                 <label for="source">Price Source</label>
                 <select id="source">
                     <option value="tcgplayer">TCGPlayer (via Scryfall)</option>
+                    <option value="cardkingdom">Card Kingdom</option>
                 </select>
             </div>
             <button class="btn btn-primary" id="sortBtn" onclick="processCards()">
@@ -399,8 +400,8 @@ Black Lotus"></textarea>
         </div>
 
         <footer>
-            <p>Prices from <a href="https://scryfall.com" target="_blank">Scryfall API</a> (TCGPlayer market prices)</p>
-            <p style="margin-top: 0.5rem;">Rate limited to ~10 requests/second. Large lists may take a moment.</p>
+            <p>TCGPlayer prices from <a href="https://scryfall.com" target="_blank">Scryfall API</a> | Card Kingdom prices updated hourly</p>
+            <p style="margin-top: 0.5rem;">TCGPlayer lookups are rate limited (~10/sec). Card Kingdom uses cached pricelist for instant results.</p>
         </footer>
     </div>
 
@@ -412,7 +413,15 @@ Black Lotus"></textarea>
             all: []
         };
         let currentTab = 'below';
+        let currentSource = 'tcgplayer';
         let priceCache = {};
+        let ckPricelist = null;
+        let ckPricelistUpdated = null;
+
+        // Normalize card name (strip accents for Card Kingdom lookups)
+        function normalizeName(name) {
+            return name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+        }
 
         // Load cache from localStorage
         function loadCache() {
@@ -444,9 +453,9 @@ Black Lotus"></textarea>
             }
         }
 
-        // Get cached price
-        function getCachedPrice(cardName) {
-            const key = cardName.toLowerCase().trim();
+        // Get cached price (for Scryfall)
+        function getCachedPrice(cardName, source) {
+            const key = `${source}:${cardName.toLowerCase().trim()}`;
             const entry = priceCache[key];
             if (entry) {
                 const now = Date.now();
@@ -459,8 +468,8 @@ Black Lotus"></textarea>
         }
 
         // Cache a price
-        function cachePrice(cardName, price) {
-            const key = cardName.toLowerCase().trim();
+        function cachePrice(cardName, price, source) {
+            const key = `${source}:${cardName.toLowerCase().trim()}`;
             priceCache[key] = {
                 price: price,
                 timestamp: Date.now()
@@ -468,10 +477,75 @@ Black Lotus"></textarea>
             saveCache();
         }
 
+        // Load Card Kingdom pricelist
+        async function loadCKPricelist() {
+            if (ckPricelist !== null) {
+                return true;
+            }
+            
+            try {
+                updateStatus('Loading Card Kingdom pricelist...');
+                const response = await fetch('data/ck_pricelist.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load pricelist');
+                }
+                const data = await response.json();
+                ckPricelist = {};
+                ckPricelistUpdated = data.updated;
+                
+                // Build lookup index with normalized names
+                for (const [name, price] of Object.entries(data.prices)) {
+                    const normalizedKey = normalizeName(name);
+                    ckPricelist[normalizedKey] = { name, price };
+                }
+                
+                console.log(`Loaded ${Object.keys(ckPricelist).length} Card Kingdom prices`);
+                return true;
+            } catch (e) {
+                console.error('Failed to load CK pricelist:', e);
+                updateStatus('Failed to load Card Kingdom pricelist. Try TCGPlayer instead.', true);
+                return false;
+            }
+        }
+
+        // Look up price in Card Kingdom pricelist
+        function lookupCKPrice(cardName) {
+            const normalized = normalizeName(cardName);
+            const entry = ckPricelist[normalized];
+            
+            if (entry) {
+                return {
+                    name: entry.name,
+                    price: entry.price,
+                    cached: true
+                };
+            }
+            
+            // Try without the back face for double-faced cards
+            if (cardName.includes(' // ')) {
+                const frontFace = cardName.split(' // ')[0];
+                const normalizedFront = normalizeName(frontFace);
+                const frontEntry = ckPricelist[normalizedFront];
+                if (frontEntry) {
+                    return {
+                        name: frontEntry.name,
+                        price: frontEntry.price,
+                        cached: true
+                    };
+                }
+            }
+            
+            return {
+                name: cardName,
+                price: null,
+                error: 'Not found in Card Kingdom'
+            };
+        }
+
         // Fetch price from Scryfall
-        async function fetchPrice(cardName) {
+        async function fetchScryfallPrice(cardName) {
             // Check cache first
-            const cached = getCachedPrice(cardName);
+            const cached = getCachedPrice(cardName, 'tcgplayer');
             if (cached !== null) {
                 return { name: cardName, price: cached, cached: true };
             }
@@ -489,7 +563,7 @@ Black Lotus"></textarea>
                 const price = data.prices?.usd ? parseFloat(data.prices.usd) : null;
                 
                 if (price !== null) {
-                    cachePrice(cardName, price);
+                    cachePrice(cardName, price, 'tcgplayer');
                 }
 
                 return {
@@ -511,6 +585,9 @@ Black Lotus"></textarea>
         async function processCards() {
             const input = document.getElementById('inputCards').value;
             const threshold = parseFloat(document.getElementById('threshold').value) || 1.00;
+            const source = document.getElementById('source').value;
+            currentSource = source;
+            
             const cards = input.split('\n')
                 .map(line => line.trim())
                 .filter(line => line.length > 0);
@@ -518,6 +595,14 @@ Black Lotus"></textarea>
             if (cards.length === 0) {
                 updateStatus('Please enter at least one card name', true);
                 return;
+            }
+
+            // Load Card Kingdom pricelist if needed
+            if (source === 'cardkingdom') {
+                const loaded = await loadCKPricelist();
+                if (!loaded) {
+                    return;
+                }
             }
 
             // Reset state
@@ -530,9 +615,15 @@ Black Lotus"></textarea>
             let processed = 0;
 
             for (const card of cards) {
-                updateStatus(`Fetching price for: ${card} (${processed + 1}/${cards.length})`);
+                updateStatus(`Looking up: ${card} (${processed + 1}/${cards.length})`);
                 
-                const result = await fetchPrice(card);
+                let result;
+                if (source === 'cardkingdom') {
+                    result = lookupCKPrice(card);
+                } else {
+                    result = await fetchScryfallPrice(card);
+                }
+                
                 results.all.push(result);
 
                 if (result.price !== null) {
@@ -549,8 +640,8 @@ Black Lotus"></textarea>
                 processed++;
                 progressFill.style.width = `${(processed / cards.length) * 100}%`;
 
-                // Rate limiting - only delay if not cached
-                if (!result.cached && processed < cards.length) {
+                // Rate limiting for Scryfall - only delay if not cached
+                if (source === 'tcgplayer' && !result.cached && processed < cards.length) {
                     await sleep(100);
                 }
             }
@@ -581,6 +672,11 @@ Black Lotus"></textarea>
             document.getElementById('aboveCount').textContent = results.above.length;
         }
 
+        // Get source display name
+        function getSourceName() {
+            return currentSource === 'cardkingdom' ? 'Card Kingdom' : 'TCGPlayer (via Scryfall)';
+        }
+
         // Update output textarea based on current tab
         function updateOutput() {
             const output = document.getElementById('outputCards');
@@ -597,7 +693,10 @@ Black Lotus"></textarea>
                 
                 let summary = `MTG Card Price Summary\n`;
                 summary += `======================\n\n`;
-                summary += `Price Source: TCGPlayer (via Scryfall)\n`;
+                summary += `Price Source: ${getSourceName()}\n`;
+                if (currentSource === 'cardkingdom' && ckPricelistUpdated) {
+                    summary += `Prices Updated: ${new Date(ckPricelistUpdated).toLocaleDateString()}\n`;
+                }
                 summary += `Threshold: $${threshold.toFixed(2)}\n`;
                 summary += `Date: ${new Date().toLocaleDateString()}\n\n`;
                 summary += `BELOW $${threshold.toFixed(2)}: ${results.below.length} cards - $${belowTotal.toFixed(2)}\n`;

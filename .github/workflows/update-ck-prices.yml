@@ -1,0 +1,103 @@
+name: Update Card Kingdom Prices
+
+on:
+  schedule:
+    # Run once per hour
+    - cron: '0 * * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch and process Card Kingdom pricelist
+        run: |
+          python3 << 'EOF'
+          import json
+          import urllib.request
+          from datetime import datetime
+          
+          print("Fetching Card Kingdom pricelist...")
+          try:
+              req = urllib.request.Request(
+                  "https://api.cardkingdom.com/api/pricelist",
+                  headers={"User-Agent": "MTG-Price-Sorter/1.0"}
+              )
+              with urllib.request.urlopen(req, timeout=60) as response:
+                  raw_data = json.loads(response.read().decode())
+          except Exception as e:
+              print(f"Failed to fetch pricelist: {e}")
+              exit(0)  # Don't fail the workflow, just keep existing data
+          
+          if "data" not in raw_data:
+              print("Invalid response format")
+              exit(0)
+          
+          print(f"Processing {len(raw_data['data'])} card entries...")
+          
+          # Index by lowercase name
+          cards_by_name = {}
+          for card in raw_data["data"]:
+              name = card.get("name", "").lower()
+              if not name:
+                  continue
+              if name not in cards_by_name:
+                  cards_by_name[name] = []
+              cards_by_name[name].append(card)
+          
+          # Build simplified price index
+          prices = {}
+          for name_key, cards in cards_by_name.items():
+              best_price = None
+              best_name = None
+              for card in cards:
+                  if card.get("is_foil") == "true":
+                      continue
+                  qty = card.get("qty_retail", 0)
+                  if qty <= 0:
+                      continue
+                  try:
+                      price = float(card.get("price_retail", 0))
+                      if best_price is None or price < best_price:
+                          best_price = price
+                          best_name = card.get("name", name_key)
+                  except (ValueError, TypeError):
+                      continue
+              
+              if best_price is not None:
+                  prices[best_name] = best_price
+          
+          output = {
+              "updated": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+              "prices": prices
+          }
+          
+          with open("data/ck_pricelist.json", "w") as f:
+              json.dump(output, f, separators=(",", ":"))
+          
+          print(f"Created pricelist with {len(prices)} cards")
+          EOF
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ck_pricelist.json
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update Card Kingdom pricelist [automated]"
+            git push
+          fi
