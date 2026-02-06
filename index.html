@@ -321,6 +321,34 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        .external-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-left: 1rem;
+        }
+
+        .external-link:hover {
+            text-decoration: underline;
+        }
+
+        .external-link::after {
+            content: "↗";
+            font-size: 0.75rem;
+        }
+
+        .ck-builder-link {
+            display: none;
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -337,10 +365,13 @@
             </div>
             <div class="control-group">
                 <label for="source">Price Source</label>
-                <select id="source">
+                <select id="source" onchange="updateBuilderLink()">
                     <option value="tcgplayer">TCGPlayer (via Scryfall)</option>
                     <option value="cardkingdom">Card Kingdom</option>
                 </select>
+                <a href="https://www.cardkingdom.com/builder" target="_blank" rel="noopener noreferrer" class="external-link" id="ckBuilderLink" style="display: none;">
+                    Card Kingdom Builder
+                </a>
             </div>
             <button class="btn btn-primary" id="sortBtn" onclick="processCards()">
                 Sort Cards
@@ -776,8 +807,16 @@ Path to Exile
 Cultivate`;
         }
 
+        // Update Card Kingdom builder link visibility
+        function updateBuilderLink() {
+            const source = document.getElementById('source').value;
+            const link = document.getElementById('ckBuilderLink');
+            link.style.display = source === 'cardkingdom' ? 'inline-flex' : 'none';
+        }
+
         // Initialize
         loadCache();
+        updateBuilderLink();
     </script>
 </body>
 </html>
