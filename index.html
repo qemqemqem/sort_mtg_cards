@@ -299,6 +299,11 @@
             color: var(--bg-primary);
         }
 
+        .badge-notfound {
+            background: var(--text-secondary);
+            color: var(--bg-primary);
+        }
+
         footer {
             text-align: center;
             margin-top: 2rem;
@@ -369,6 +374,9 @@ Black Lotus"></textarea>
                         <button class="tab-btn" data-tab="above" onclick="switchTab('above')">
                             Above <span class="badge badge-above" id="aboveCount">0</span>
                         </button>
+                        <button class="tab-btn" data-tab="notfound" onclick="switchTab('notfound')">
+                            Not Found <span class="badge badge-notfound" id="notFoundCount">0</span>
+                        </button>
                         <button class="tab-btn" data-tab="summary" onclick="switchTab('summary')">Summary</button>
                     </div>
                 </div>
@@ -410,6 +418,7 @@ Black Lotus"></textarea>
         let results = {
             below: [],
             above: [],
+            notFound: [],
             all: []
         };
         let currentTab = 'below';
@@ -606,7 +615,7 @@ Black Lotus"></textarea>
             }
 
             // Reset state
-            results = { below: [], above: [], all: [] };
+            results = { below: [], above: [], notFound: [], all: [] };
             document.getElementById('sortBtn').disabled = true;
             document.getElementById('progressBar').classList.add('active');
             document.getElementById('stats').style.display = 'none';
@@ -633,8 +642,8 @@ Black Lotus"></textarea>
                         results.above.push(result);
                     }
                 } else {
-                    // Cards without prices go to "above" list
-                    results.above.push(result);
+                    // Cards without prices go to "not found" list
+                    results.notFound.push(result);
                 }
 
                 processed++;
@@ -670,6 +679,7 @@ Black Lotus"></textarea>
             document.getElementById('grandTotal').textContent = `$${grandTotal.toFixed(2)}`;
             document.getElementById('belowCount').textContent = results.below.length;
             document.getElementById('aboveCount').textContent = results.above.length;
+            document.getElementById('notFoundCount').textContent = results.notFound.length;
         }
 
         // Get source display name
@@ -685,6 +695,8 @@ Black Lotus"></textarea>
                 output.value = results.below.map(c => c.name).join('\n');
             } else if (currentTab === 'above') {
                 output.value = results.above.map(c => c.name).join('\n');
+            } else if (currentTab === 'notfound') {
+                output.value = results.notFound.map(c => `${c.name}${c.error ? ` (${c.error})` : ''}`).join('\n');
             } else if (currentTab === 'summary') {
                 const threshold = parseFloat(document.getElementById('threshold').value) || 1.00;
                 const belowTotal = results.below.reduce((sum, c) => sum + (c.price || 0), 0);
@@ -701,6 +713,7 @@ Black Lotus"></textarea>
                 summary += `Date: ${new Date().toLocaleDateString()}\n\n`;
                 summary += `BELOW $${threshold.toFixed(2)}: ${results.below.length} cards - $${belowTotal.toFixed(2)}\n`;
                 summary += `AT/ABOVE $${threshold.toFixed(2)}: ${results.above.length} cards - $${aboveTotal.toFixed(2)}\n`;
+                summary += `NOT FOUND: ${results.notFound.length} cards\n`;
                 summary += `GRAND TOTAL: $${grandTotal.toFixed(2)}\n\n`;
                 summary += `--- BELOW THRESHOLD ---\n`;
                 results.below.forEach(c => {
@@ -708,9 +721,14 @@ Black Lotus"></textarea>
                 });
                 summary += `\n--- AT/ABOVE THRESHOLD ---\n`;
                 results.above.forEach(c => {
-                    const priceStr = c.price !== null ? `$${c.price.toFixed(2).padStart(7)}` : '  N/A   ';
-                    summary += `${priceStr} | ${c.name}${c.error ? ` (${c.error})` : ''}\n`;
+                    summary += `$${c.price.toFixed(2).padStart(7)} | ${c.name}\n`;
                 });
+                if (results.notFound.length > 0) {
+                    summary += `\n--- NOT FOUND ---\n`;
+                    results.notFound.forEach(c => {
+                        summary += `${c.name}${c.error ? ` (${c.error})` : ''}\n`;
+                    });
+                }
                 
                 output.value = summary;
             }
