@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTG Card Price Sorter</title>
+    <style>
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-tertiary: #0f3460;
+            --accent: #e94560;
+            --accent-hover: #ff6b6b;
+            --text-primary: #eaeaea;
+            --text-secondary: #a0a0a0;
+            --border: #2a2a4a;
+            --success: #4ecca3;
+            --warning: #ffc107;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        input[type="number"], select {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            min-width: 150px;
+        }
+
+        input[type="number"]:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            align-self: flex-end;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 1rem 1.5rem;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .panel-body {
+            padding: 1rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 400px;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .output-tabs {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .tab-btn:hover:not(.active) {
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .progress-bar.active {
+            display: block;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .status {
+            text-align: center;
+            padding: 0.75rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .error {
+            color: var(--accent);
+        }
+
+        .copy-btn {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .badge-below {
+            background: var(--success);
+            color: var(--bg-primary);
+        }
+
+        .badge-above {
+            background: var(--warning);
+            color: var(--bg-primary);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MTG Card Price Sorter</h1>
+            <p class="subtitle">Sort and filter your Magic: The Gathering cards by price</p>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="threshold">Price Threshold ($)</label>
+                <input type="number" id="threshold" value="1.00" min="0" step="0.01">
+            </div>
+            <div class="control-group">
+                <label for="source">Price Source</label>
+                <select id="source">
+                    <option value="tcgplayer">TCGPlayer (via Scryfall)</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="sortBtn" onclick="processCards()">
+                Sort Cards
+            </button>
+        </div>
+
+        <div class="main-content">
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">Input Cards</span>
+                    <button class="btn btn-secondary copy-btn" onclick="loadSample()">Load Sample</button>
+                </div>
+                <div class="panel-body">
+                    <textarea id="inputCards" placeholder="Enter card names, one per line...
+
+Example:
+Lightning Bolt
+Counterspell
+Sol Ring
+Black Lotus"></textarea>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="panel-title">Output</span>
+                    <div class="output-tabs">
+                        <button class="tab-btn active" data-tab="below" onclick="switchTab('below')">
+                            Below <span class="badge badge-below" id="belowCount">0</span>
+                        </button>
+                        <button class="tab-btn" data-tab="above" onclick="switchTab('above')">
+                            Above <span class="badge badge-above" id="aboveCount">0</span>
+                        </button>
+                        <button class="tab-btn" data-tab="summary" onclick="switchTab('summary')">Summary</button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="stats" id="stats" style="display: none;">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalCards">0</div>
+                            <div class="stat-label">Total Cards</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="belowTotal">$0.00</div>
+                            <div class="stat-label">Below Threshold</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="grandTotal">$0.00</div>
+                            <div class="stat-label">Grand Total</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                    <div class="status" id="status">Enter cards and click "Sort Cards" to begin</div>
+                    <textarea id="outputCards" readonly placeholder="Results will appear here..."></textarea>
+                    <div style="margin-top: 0.5rem; text-align: right;">
+                        <button class="btn btn-secondary copy-btn" onclick="copyOutput()">Copy to Clipboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Prices from <a href="https://scryfall.com" target="_blank">Scryfall API</a> (TCGPlayer market prices)</p>
+            <p style="margin-top: 0.5rem;">Rate limited to ~10 requests/second. Large lists may take a moment.</p>
+        </footer>
+    </div>
+
+    <script>
+        // State
+        let results = {
+            below: [],
+            above: [],
+            all: []
+        };
+        let currentTab = 'below';
+        let priceCache = {};
+
+        // Load cache from localStorage
+        function loadCache() {
+            try {
+                const cached = localStorage.getItem('mtgPriceCache');
+                if (cached) {
+                    const data = JSON.parse(cached);
+                    const now = Date.now();
+                    const maxAge = 24 * 60 * 60 * 1000; // 24 hours
+                    
+                    // Filter out expired entries
+                    for (const [key, entry] of Object.entries(data)) {
+                        if (now - entry.timestamp < maxAge) {
+                            priceCache[key] = entry;
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Failed to load cache:', e);
+            }
+        }
+
+        // Save cache to localStorage
+        function saveCache() {
+            try {
+                localStorage.setItem('mtgPriceCache', JSON.stringify(priceCache));
+            } catch (e) {
+                console.error('Failed to save cache:', e);
+            }
+        }
+
+        // Get cached price
+        function getCachedPrice(cardName) {
+            const key = cardName.toLowerCase().trim();
+            const entry = priceCache[key];
+            if (entry) {
+                const now = Date.now();
+                const maxAge = 24 * 60 * 60 * 1000;
+                if (now - entry.timestamp < maxAge) {
+                    return entry.price;
+                }
+            }
+            return null;
+        }
+
+        // Cache a price
+        function cachePrice(cardName, price) {
+            const key = cardName.toLowerCase().trim();
+            priceCache[key] = {
+                price: price,
+                timestamp: Date.now()
+            };
+            saveCache();
+        }
+
+        // Fetch price from Scryfall
+        async function fetchPrice(cardName) {
+            // Check cache first
+            const cached = getCachedPrice(cardName);
+            if (cached !== null) {
+                return { name: cardName, price: cached, cached: true };
+            }
+
+            try {
+                const response = await fetch(
+                    `https://api.scryfall.com/cards/named?fuzzy=${encodeURIComponent(cardName)}`
+                );
+                
+                if (!response.ok) {
+                    return { name: cardName, price: null, error: 'Not found' };
+                }
+
+                const data = await response.json();
+                const price = data.prices?.usd ? parseFloat(data.prices.usd) : null;
+                
+                if (price !== null) {
+                    cachePrice(cardName, price);
+                }
+
+                return {
+                    name: data.name,
+                    price: price,
+                    error: price === null ? 'No price available' : null
+                };
+            } catch (e) {
+                return { name: cardName, price: null, error: e.message };
+            }
+        }
+
+        // Sleep helper
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Process all cards
+        async function processCards() {
+            const input = document.getElementById('inputCards').value;
+            const threshold = parseFloat(document.getElementById('threshold').value) || 1.00;
+            const cards = input.split('\n')
+                .map(line => line.trim())
+                .filter(line => line.length > 0);
+
+            if (cards.length === 0) {
+                updateStatus('Please enter at least one card name', true);
+                return;
+            }
+
+            // Reset state
+            results = { below: [], above: [], all: [] };
+            document.getElementById('sortBtn').disabled = true;
+            document.getElementById('progressBar').classList.add('active');
+            document.getElementById('stats').style.display = 'none';
+
+            const progressFill = document.getElementById('progressFill');
+            let processed = 0;
+
+            for (const card of cards) {
+                updateStatus(`Fetching price for: ${card} (${processed + 1}/${cards.length})`);
+                
+                const result = await fetchPrice(card);
+                results.all.push(result);
+
+                if (result.price !== null) {
+                    if (result.price < threshold) {
+                        results.below.push(result);
+                    } else {
+                        results.above.push(result);
+                    }
+                } else {
+                    // Cards without prices go to "above" list
+                    results.above.push(result);
+                }
+
+                processed++;
+                progressFill.style.width = `${(processed / cards.length) * 100}%`;
+
+                // Rate limiting - only delay if not cached
+                if (!result.cached && processed < cards.length) {
+                    await sleep(100);
+                }
+            }
+
+            // Sort by price
+            results.below.sort((a, b) => (b.price || 0) - (a.price || 0));
+            results.above.sort((a, b) => (b.price || 0) - (a.price || 0));
+
+            // Update UI
+            updateStats(threshold);
+            updateOutput();
+            updateStatus(`Processed ${cards.length} cards`);
+            
+            document.getElementById('sortBtn').disabled = false;
+            document.getElementById('progressBar').classList.remove('active');
+            document.getElementById('stats').style.display = 'grid';
+        }
+
+        // Update statistics display
+        function updateStats(threshold) {
+            const belowTotal = results.below.reduce((sum, c) => sum + (c.price || 0), 0);
+            const grandTotal = results.all.reduce((sum, c) => sum + (c.price || 0), 0);
+
+            document.getElementById('totalCards').textContent = results.all.length;
+            document.getElementById('belowTotal').textContent = `$${belowTotal.toFixed(2)}`;
+            document.getElementById('grandTotal').textContent = `$${grandTotal.toFixed(2)}`;
+            document.getElementById('belowCount').textContent = results.below.length;
+            document.getElementById('aboveCount').textContent = results.above.length;
+        }
+
+        // Update output textarea based on current tab
+        function updateOutput() {
+            const output = document.getElementById('outputCards');
+            
+            if (currentTab === 'below') {
+                output.value = results.below.map(c => c.name).join('\n');
+            } else if (currentTab === 'above') {
+                output.value = results.above.map(c => c.name).join('\n');
+            } else if (currentTab === 'summary') {
+                const threshold = parseFloat(document.getElementById('threshold').value) || 1.00;
+                const belowTotal = results.below.reduce((sum, c) => sum + (c.price || 0), 0);
+                const aboveTotal = results.above.reduce((sum, c) => sum + (c.price || 0), 0);
+                const grandTotal = belowTotal + aboveTotal;
+                
+                let summary = `MTG Card Price Summary\n`;
+                summary += `======================\n\n`;
+                summary += `Price Source: TCGPlayer (via Scryfall)\n`;
+                summary += `Threshold: $${threshold.toFixed(2)}\n`;
+                summary += `Date: ${new Date().toLocaleDateString()}\n\n`;
+                summary += `BELOW $${threshold.toFixed(2)}: ${results.below.length} cards - $${belowTotal.toFixed(2)}\n`;
+                summary += `AT/ABOVE $${threshold.toFixed(2)}: ${results.above.length} cards - $${aboveTotal.toFixed(2)}\n`;
+                summary += `GRAND TOTAL: $${grandTotal.toFixed(2)}\n\n`;
+                summary += `--- BELOW THRESHOLD ---\n`;
+                results.below.forEach(c => {
+                    summary += `$${(c.price || 0).toFixed(2).padStart(7)} | ${c.name}\n`;
+                });
+                summary += `\n--- AT/ABOVE THRESHOLD ---\n`;
+                results.above.forEach(c => {
+                    const priceStr = c.price !== null ? `$${c.price.toFixed(2).padStart(7)}` : '  N/A   ';
+                    summary += `${priceStr} | ${c.name}${c.error ? ` (${c.error})` : ''}\n`;
+                });
+                
+                output.value = summary;
+            }
+        }
+
+        // Switch output tab
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tab);
+            });
+            updateOutput();
+        }
+
+        // Update status message
+        function updateStatus(message, isError = false) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.classList.toggle('error', isError);
+        }
+
+        // Copy output to clipboard
+        function copyOutput() {
+            const output = document.getElementById('outputCards');
+            output.select();
+            document.execCommand('copy');
+            
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = originalText, 1500);
+        }
+
+        // Load sample cards
+        function loadSample() {
+            document.getElementById('inputCards').value = `Lightning Bolt
+Counterspell
+Sol Ring
+Swords to Plowshares
+Birds of Paradise
+Llanowar Elves
+Dark Ritual
+Brainstorm
+Path to Exile
+Cultivate`;
+        }
+
+        // Initialize
+        loadCache();
+    </script>
+</body>
+</html>

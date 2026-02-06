@@ -4,10 +4,12 @@ venv/
 # Price cache
 .price_cache.json
 .ck_pricelist.json
+pricelist.html
 
 # Output files
 *_below.txt
 *_above.txt
+*_summary.txt
 sorted_*.txt
 
 # Python
